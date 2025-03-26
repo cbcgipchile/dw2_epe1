@@ -1,11 +1,11 @@
 # dw2_epe1
 ## Antecedentes del proyecto
-Actividad	: EPE1 (Primera Evaluación Parcial Estructurada)
-Institución	: IPCHILE
-Sede		: Campus Virtual
-Carrera		: Ingeniería en Informática
-Asignatura	: Desarrollo Web 2
-Estudiante	: Carolina Casanova García
+* Actividad	: EPE1 (Primera Evaluación Parcial Estructurada)
+* Institución	: IPCHILE
+* Sede		: Campus Virtual
+* Carrera		: Ingeniería en Informática
+* Asignatura	: Desarrollo Web 2
+* Estudiante	: Carolina Casanova García
 
 ## Descripción del proyecto
 Se trata de una aplicación web que tiene por objetivo servir de portafolio personal y profesional de quien escribe.
