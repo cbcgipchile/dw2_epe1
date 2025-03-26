@@ -1,0 +1,173 @@
+[
+ {
+  "id_item"			:1,
+  "id_tipo"			:"post",
+  "id_seccion"		:"home",
+  "id_item_padre"	:0,
+  "codigo"			:"presentacion",
+  "nombre"			:"Presentacion",
+  "orden"			:1
+ },
+ {
+  "id_item"			:2,
+  "id_tipo"			:"post",
+  "id_seccion"		:"project",
+  "id_item_padre"	:0,
+  "codigo"			:"valle-qpixel",
+  "nombre"			:"Valle QPixel",
+  "orden"			:1,
+  "parametros"		:
+  [
+   { "id_param":"descripcion", "valor":"Portal web personal de tipo Comunitario, orientado a aficionados al pixelart." },
+   { "id_param":"url_portada", "valor":"./img/project-valle-qpixel.jpg" }
+  ]
+ },
+ {
+  "id_item"			:3,
+  "id_tipo"			:"post",
+  "id_seccion"		:"project",
+  "id_item_padre"	:0,
+  "codigo"			:"refugio-secreto",
+  "nombre"			:"Refugio Secreto",
+  "orden"			:2,
+  "parametros"		:
+  [
+   { "id_param":"descripcion", "valor":"Portal web personal orientado a generar una experiencia lúdica para los visitantes, con juegos, historias y material descargable." },
+   { "id_param":"url_portada", "valor":"./img/project-refugio-secreto.jpg" }
+  ]
+ },
+ {
+  "id_item"			:10,
+  "id_tipo"			:"post",
+  "id_seccion"		:"experience",
+  "id_item_padre"	:0,
+  "codigo"			:"gecof-2",
+  "nombre"			:"GECOF 2.0",
+  "orden"			:1,
+  "fecha_creacion"	:"2024-07-15",
+  "parametros"		:
+  [
+   { "id_param":"descripcion", "valor":"Diseño gráfico y desarrollo web FrontEnd de Portal GECOF 2.0 de empresa de Transportes Géminis, Calama. Incluye comunicación asíncrona vía websocket y seguimiento en tiempo real de vehículos en mapa (Google Maps API)." },
+   { "id_param":"url_portada", "valor":"./img/experience-gecof-2.jpg" }
+  ]
+ },
+ {
+  "id_item"			:11,
+  "id_tipo"			:"post",
+  "id_seccion"		:"experience",
+  "id_item_padre"	:0,
+  "codigo"			:"geminis-corporativo",
+  "nombre"			:"Sitio Oficial Transportes Geminis",
+  "orden"			:2,
+  "fecha_creacion"	:"2021-09-10",
+  "parametros"		:
+  [
+   { "id_param":"url", "valor":"https://www.geminis.cl/" },
+   { "id_param":"descripcion", "valor":"Diseño gráfico web sobre plataforma WordPress 5.9 para el sitio corporativo de empresa de Transportes Géminis, Calama. Incluye desarrollo de plantillas (themes), plugins varios y administración de contenidos." },
+   { "id_param":"url_portada", "valor":"./img/experience-geminis-corporativo.jpg" }
+  ]
+ },
+ {
+  "id_item"			:12,
+  "id_tipo"			:"post",
+  "id_seccion"		:"experience",
+  "id_item_padre"	:0,
+  "codigo"			:"mistral-corporativo",
+  "nombre"			:"Sitio Oficial Centro Medico Mistral",
+  "orden"			:3,
+  "fecha_creacion"	:"2019-10-28",
+  "parametros"		:
+  [
+   { "id_param":"url", "valor":"https://www.cirugialaserena.cl/" },
+   { "id_param":"descripcion", "valor":"Diseño y desarrollo fullstack del sitio corporativo del Centro Médico Mistral, La Serena. Incluye interfaz de administración para usuarios autorizados." },
+   { "id_param":"url_portada", "valor":"./img/experience-mistral-corporativo.jpg" }
+  ]
+ },
+ {
+  "id_item"			:20,
+  "id_tipo"			:"post",
+  "id_seccion"		:"skill",
+  "id_item_padre"	:0,
+  "codigo"			:"graphic-design",
+  "nombre"			:"Diseño gráfico",
+  "orden"			:1,
+  "parametros"		:
+  [
+   { "id_param":"descripcion", "valor":"Conocimiento en diseño gráfico, lo cual he aplicado en diversas áreas, como papelería, carteles, tarjetas, etc., siendo el diseño gráfico web mi especialidad." },
+   { "id_param":"url_portada", "valor":"./img/skill-graphic-design.jpg" }
+  ]
+ },
+ {
+  "id_item"			:21,
+  "id_tipo"			:"post",
+  "id_seccion"		:"skill",
+  "id_item_padre"	:0,
+  "codigo"			:"pixelart",
+  "nombre"			:"Pixelart",
+  "orden"			:2,
+  "parametros"		:
+  [
+   { "id_param":"descripcion", "valor":"Habilidades en dibujo en la técnica del pixelart, usada preferentemente para fines personales y de entretenimiento." },
+   { "id_param":"url_portada", "valor":"./img/skill-pixelart.jpg" }
+  ]
+ },
+ {
+  "id_item"			:30,
+  "id_tipo"			:"form",
+  "id_seccion"		:"contact",
+  "id_item_padre"	:0,
+  "codigo"			:"contact-form",
+  "nombre"			:"Formulario de Contacto",
+  "orden"			:1,
+  "parametros"		:
+  [
+   { "id_param":"descripcion", "valor":"¿Necesitas una asesoría web, o tal vez desarrollar una aplicación web para tu empresa o emprendimiento? Contáctame utilizando este formulario. Gracias por tu interés." },
+   { "id_param":"url_portada", "valor":"./img/contact-form.jpg" }
+  ]
+ },
+ {
+  "id_item"			:301,
+  "id_tipo"			:"field",
+  "id_seccion"		:"contact",
+  "id_item_padre"	:30,
+  "codigo"			:"contact-form-field-name",
+  "nombre"			:"Nombre",
+  "orden"			:1,
+  "parametros"		:
+  [
+   { "id_param":"field_type", "valor":"text" },
+   { "id_param":"field_length", "valor":50 },
+   { "id_param":"field_required", "valor":1 }
+  ]
+ },
+ {
+  "id_item"			:302,
+  "id_tipo"			:"field",
+  "id_seccion"		:"contact",
+  "id_item_padre"	:30,
+  "codigo"			:"contact-form-field-email",
+  "nombre"			:"Email",
+  "orden"			:2,
+  "parametros"		:
+  [
+   { "id_param":"field_type", "valor":"email" },
+   { "id_param":"field_length", "valor":150 },
+   { "id_param":"field_required", "valor":1 }
+  ]
+ },
+ {
+  "id_item"			:302,
+  "id_tipo"			:"field",
+  "id_seccion"		:"contact",
+  "id_item_padre"	:30,
+  "codigo"			:"contact-form-field-message",
+  "nombre"			:"Mensaje",
+  "orden"			:3,
+  "parametros"		:
+  [
+   { "id_param":"field_type", "valor":"textarea" },
+   { "id_param":"field_length", "valor":1024 },
+   { "id_param":"field_required", "valor":1 }
+  ]
+ }
+]
