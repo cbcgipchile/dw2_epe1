@@ -1,0 +1,35 @@
+/*
+-------------------------------------------------------------------------------
+@about		Estilos ITEMS de Seccion.
+@author		Carolina Casanova G.
+@date		26/03/2025
+@require	root.css
+-------------------------------------------------------------------------------
+*/
+
+ARTICLE
+{
+	position:relative;
+	font-size:1.2em;
+	vertical-align:top;
+	margin:var(--MarginLateral);
+}
+
+ARTICLE > *
+{
+	display:inline-block;
+}
+
+ARTICLE > H3
+{
+	
+}
+ARTICLE > P
+{
+	width:calc(100% - calc(100% / calc(var(--NumeroPhi) + 1)));
+	line-height:2em;
+}
+ARTICLE > FIGURE
+{
+	width:calc(100% / calc(var(--NumeroPhi) + 1));
+}

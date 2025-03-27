@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Servicios Inform&aacute;ticos Corval&aacute;n &amp; Casanova - DW2/EPE1</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta http-equiv="Content-Language" content="es" />
+		<meta name="copyright" content="&copy; Carolina Casanova y Jorge Corvalan" />
+		<meta name="author" content="Carolina Casanova Garcia y Jorge Corvalan" />
+		<meta name="viewport" content="initial-scale=1.0">
+		
+		<!-- Hojas de Estilos -->
+		<link rel="stylesheet" href="vw/css/root.css" />
+		<link rel="stylesheet" href="vw/css/body.css" defer />
+		<link rel="stylesheet" href="vw/css/header.css" defer />
+		<link rel="stylesheet" href="vw/css/nav.css" defer />
+		<link rel="stylesheet" href="vw/css/main.css" defer />
+		<link rel="stylesheet" href="vw/css/item.css" defer />
+		<link rel="stylesheet" href="vw/css/footer.css" defer />
+		<!-- Librerias y Controladores FrontEnd -->
+		<script src="lib/js/class.qasinc.js" defer></script>
+		<!-- <script src="vw/js/seccion.js" defer></script> -->
+		<!-- <script src="vw/js/nav.js" defer></script> -->
+		<!-- <script src="vw/js/index.js" defer></script> -->
+
+	</head>
+	
+	<body>
+		
+		<header>
+			<div data-id="logo"><div data-id="contenedor"><h1><span>Servicios Inform&aacute;ticos</span>Corval&aacute;n<br/>&amp; Casanova</h1></div></div>
+			<!-- <div data-id="info">
+				<div data-id="presentacion"><div data-id="cerrar"></div><div data-id="contenido">Les damos la bienvenida</div></div></div>
+				<div data-id="logo"><h1><span>Servicios Inform&aacute;ticos</span>Corval&aacute;n<br/>&amp; Casanova</h1></div>
+			</div> -->
+			<div data-id="menu_btn"></div>
+		</header>
+		<nav>
+			<ul data-id="menu" id="ulNavMenu">
+				<li data-type="item" data-id="home">Inicio</li>
+				<li data-type="item" data-id="project">Proyectos</li>
+				<li data-type="item" data-id="experience">Experiencia</li>
+				<li data-type="item" data-id="skill">Habilidades</li>
+				<li data-type="item" data-id="contact">Contacto</li>
+			</ul>
+		</nav>
+		
+		<main>
+			<h2 id="tituloSeccion">Inicio</h2>
+			<section id="contenidoSeccion" data-id="">
+				<article>
+					<h3>Les damos la bienvenida a nuestro portafolio.</h3><!--
+				--><p>Somos Jorge Corval&aacute;n y Carolina Casanova, profesionales del &aacute;rea inform&aacute;tica, y estamos ac&aacute; para ayudarle en su pr&oacute;ximo proyecto digital.</p><!--
+				--><figure>
+						<img src="vw/img/icon_solution.png" alt="Soluciones" />
+					</figure><!--
+			--></article>
+			</section>
+		</main>
+		
+		<footer>
+			<section data-id="footer_menu">
+				<h4>Navegaci&oacute;n</h4>
+				<ul data-id="menu" id="ulFooterMenu"></ul>
+			</section>
+			<section data-id="credits">
+				<p>Portafolio &copy; 2025 Carolina Casanova Garc&iacute;a</p>
+				<p>Desarrollado para la actividad EPE1 de la asignatura Desarrollo Web II, Ingenier&iacute;a en Inform&aacute;tica, Campus Virtual IPCHILE</p>
+			</section>
+		</footer>
+		
+		<!-- Bloque de Plantillas HTML -->
+		<div style="display:none">
+		
+			<!-- Plantilla Item de Menu -->
+			<template data-id="nav_item">
+				<li data-type="item" data-id="" data-espadre="1">
+					<span data-type="name"></span>
+				</li>
+			</template>
+			
+			<!-- Plantilla Item de Seccion -->
+			<template data-id="seccion_item">
+				<article data-id="">
+					<h3 data-field="nombre"></h3>
+					<p data-field="fecha_creacion"></p>
+					<p data-field="descripcion"></p>
+					<p data-group="url"><a data-field="url">Visitar</a></p>
+				</article>
+			</template>
+			
+		</div>
+		
+	</body>
+</html>

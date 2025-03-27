@@ -1,0 +1,47 @@
+/*
+-------------------------------------------------------------------------------
+@about		Estilos MENU NAVEGACION SUPERIOR.
+@author		Carolina Casanova G.
+@date		26/03/2025
+@require	root.css
+-------------------------------------------------------------------------------
+*/
+
+NAV
+{
+	position:relative;
+	z-index:9;
+	width:100vw;
+	min-width:var(--ClientMinWidth, 360px);
+	height:var(--NavHeight);
+	background-color:var(--ThemeColor1);
+	font-size:var(--FontSize, 11pt);
+	text-align:right;
+}
+
+NAV [data-id="menu"]
+{
+	list-style-type:none;
+	margin:0 var(--MarginLateral);
+}
+
+/* Items de menu */
+NAV [data-id="menu"] [data-type="item"]
+{
+	display:inline-block;
+	padding:0 15px;
+	cursor:pointer;
+	line-height:var(--NavHeight);
+	text-transform:uppercase;
+	text-align:center;
+	color:var(--ThemeColor6);
+}
+NAV [data-id="menu"] [data-type="item"]:hover,
+NAV [data-id="menu"] [data-type="item"].activada
+{
+	background-color:var(--ThemeColor2);
+	color:var(--ThemeColor0);
+}
+
+
+

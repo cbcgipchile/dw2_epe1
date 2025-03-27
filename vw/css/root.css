@@ -1,0 +1,42 @@
+/*
+-------------------------------------------------------------------------------
+@about		Variables de Estilos.
+@author		Carolina Casanova G.
+@date		26/03/2025
+-------------------------------------------------------------------------------
+*/
+
+:root
+{
+	/* Paleta de Colores */
+	--ThemeColor0	: #FFF;
+	--ThemeColor6	: #6A6C58;
+	/* --> Paleta extraida de https://www.color-hex.com/color-palette/1057237 */
+	--ThemeColor1	: #bfdcd2; /* (191,220,210) */
+	--ThemeColor2	: #95d4c6; /* (149,212,198) */
+	--ThemeColor3	: #f4eddc; /* (244,237,220) */
+	--ThemeColor4	: #ede3c7; /* (237,227,199) */
+	--ThemeColor5	: #9e9f8b; /* (158,159,139) */
+	
+	/* Fuentes de Texto */
+	--FontFace	: "Trebuchet MS", "Arial Narrow", "Arial", sans-serif;
+	--FontSize	: 11pt;
+	
+	/* Dimensiones varias */
+	--HeaderHeight	: 90px;
+	--NavHeight		: 90px;
+	
+	--ClientMinWidth: 360px;
+	--MarginLateral	: 45px;
+	
+	--NumeroPhi		: calc(calc(1 + sqrt(5)) / 2);
+}
+
+/* Pantallas Chicas */
+@media (max-width:480px)
+{
+	:root
+	{
+		--MarginLateral: 20px;
+	}
+}

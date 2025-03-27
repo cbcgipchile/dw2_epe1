@@ -1,0 +1,76 @@
+/*
+-------------------------------------------------------------------------------
+@about		Estilos ENCABEZADO DE PAGINA.
+@author		Carolina Casanova G.
+@date		26/03/2025
+@require	root.css
+-------------------------------------------------------------------------------
+*/
+
+/* Contenedor */
+HEADER
+{
+	position:relative;
+	z-index:10;
+	width:100vw;
+	min-width:var(--ClientMinWidth, 360px);
+	height:66vh;
+	background-image:url("../busca_webp.php?img=img/bg-home.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position:left center;
+	box-shadow:0 3px 6px rgba(0,0,0,0.5);
+	font-size:var(--FontSize, 11pt);
+}
+
+/* Logo */
+HEADER [data-id="logo"]
+{
+	position:absolute;
+	display:block;
+	right:0;
+	width:calc(100vw / calc(var(--NumeroPhi) + 1));
+	height:100%;
+	background-color:rgba(255,255,255,0.75);
+	font-size:1.6em;
+}
+HEADER [data-id="logo"] [data-id="contenedor"]
+{
+	position:relative;
+	display:table-cell;
+	vertical-align:middle;
+	width:100%;
+	height:66vh;
+}
+HEADER [data-id="logo"] [data-id="contenedor"] H1
+{
+	width:calc(100% - calc(var(--MarginLateral) * 2));
+	padding:var(--MarginLateral);
+	text-align:left;
+}
+HEADER [data-id="logo"] [data-id="contenedor"] H1 SPAN
+{
+	display:block;
+	color:var(--ThemeColor2);
+	font-size:0.6em;
+	text-transform:uppercase;
+}
+
+/* Boton Menu */
+HEADER [data-id="menu_btn"]
+{
+	display:none;
+}
+
+/* 
+-----------------------------
+Pantallas Chicas 
+-----------------------------
+*/
+@media (max-width:800px)
+{
+	HEADER
+	{
+		height:100vh;
+	}
+}

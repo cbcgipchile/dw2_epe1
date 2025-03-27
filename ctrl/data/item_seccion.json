@@ -6,7 +6,11 @@
   "id_item_padre"	:0,
   "codigo"			:"presentacion",
   "nombre"			:"Presentacion",
-  "orden"			:1
+  "orden"			:1,
+  "parametros"		:
+  [
+   { "id_param":"contenido", "valor":"Les damos la bienvenida a nuestro portafolio. Somos Jorge Corvalán y Carolina Casanova, profesionales del área informática, y estamos acá para ayudarle en su próximo proyecto digital." }
+  ]
  },
  {
   "id_item"			:2,

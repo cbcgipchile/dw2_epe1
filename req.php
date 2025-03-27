@@ -7,6 +7,9 @@
 -------------------------------------------------------------------------------
 */
 
+# Manejo de mensajes de error:
+error_reporting(E_ALL ^ E_NOTICE);
+
 # ---------------------------
 # Llamada librerias y modulos requeridos:
 # ---------------------------

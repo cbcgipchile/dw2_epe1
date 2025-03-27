@@ -1,0 +1,30 @@
+/*
+-------------------------------------------------------------------------------
+@about		Estilos CONTENEDOR PRINCIPAL DE CONTENIDO.
+@author		Carolina Casanova G.
+@date		26/03/2025
+@require	root.css
+-------------------------------------------------------------------------------
+*/
+
+MAIN
+{
+	position:relative;
+	z-index:8;
+	width:100vw;
+	min-width:var(--ClientMinWidth, 360px);
+	background-color:var(--ThemeColor0);
+	font-size:var(--FontSize, 11pt);
+}
+
+/* Titulo de seccion */
+MAIN > H2
+{
+	padding:var(--MarginLateral);
+}
+
+/* Contenedor principal */
+MAIN > SECTION
+{
+	padding-bottom:var(--MarginLateral);
+}

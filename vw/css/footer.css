@@ -1,0 +1,30 @@
+/*
+-------------------------------------------------------------------------------
+@about		Estilos PIE DE PAGINA.
+@author		Carolina Casanova G.
+@date		26/03/2025
+@require	root.css
+-------------------------------------------------------------------------------
+*/
+
+FOOTER
+{
+	font-size:var(--FontSize, 11pt);
+}
+
+FOOTER > SECTION
+{
+	padding:var(--MarginLateral) 0;
+	color:var(--ThemeColor0);
+}
+
+FOOTER [data-id="footer_menu"]
+{
+	padding:var(--MarginLateral);
+	background-color:rgba(255,255,255,0.20);
+}
+FOOTER [data-id="credits"]
+{
+	text-align:center;
+	font-size:0.75em;
+}

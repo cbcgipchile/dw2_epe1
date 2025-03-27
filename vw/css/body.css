@@ -1,0 +1,24 @@
+/*
+-------------------------------------------------------------------------------
+@about		Estilos Globales.
+@author		Carolina Casanova G.
+@date		26/03/2025
+@require	root.css
+-------------------------------------------------------------------------------
+*/
+
+*
+{
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+BODY
+{
+	background-color:var(--ThemeColor5, #FFF);
+	color:var(--ThemeColor6, #000);
+	font-family:var(--FontFace, sans-serif);
+	font-size:0;
+	min-width:var(--ClientMinWidth, 360px);
+}
