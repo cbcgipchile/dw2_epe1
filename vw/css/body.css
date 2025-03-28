@@ -22,3 +22,51 @@ BODY
 	font-size:0;
 	min-width:var(--ClientMinWidth, 360px);
 }
+
+A
+{
+	color:var(--ThemeColor0);
+	text-decoration:none;
+}
+
+/* Estilos compartidos */
+.oculta
+{
+	display:none !important;
+}
+
+/* Estilos de mensajes */
+.mensaje
+{
+	display:block;
+	position:fixed;
+	z-index:20;
+	top:var(--MarginLateral);
+	left:5px;
+	width:calc(100% - 75px - 10px);
+	height:auto;
+	padding:15px 15px 15px 60px;
+	background-color:var(--ThemeColor3);
+	background-position:15px 15px;
+	background-repeat:no-repeat;
+	background-size:24px auto;
+	border-radius:4px;
+	font-size:var(--FontSize, 12pt);
+	-webkit-box-shadow:0 3px 6px rgba(0,0,0,0.5);
+	-moz-box-shadow:0 3px 6px rgba(0,0,0,0.5);
+	box-shadow:0 3px 6px rgba(0,0,0,0.5);
+	cursor:pointer;
+}
+.mensaje.carga
+{
+	background-image:url("../img/icon_carga.gif");
+}
+.mensaje.error
+{
+	background-image:url("../img/icon_error.png");
+}
+.mensaje.exito
+{
+	background-color:var(--ThemeColor1);
+	background-image:url("../img/icon_exito.gif");
+}

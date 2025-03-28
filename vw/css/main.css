@@ -11,16 +11,18 @@ MAIN
 {
 	position:relative;
 	z-index:8;
-	width:100vw;
+	width:100%;
+	max-width:100vw;
 	min-width:var(--ClientMinWidth, 360px);
 	background-color:var(--ThemeColor0);
-	font-size:var(--FontSize, 11pt);
 }
 
 /* Titulo de seccion */
 MAIN > H2
 {
 	padding:var(--MarginLateral);
+	font-size:calc(var(--FontSize, 11pt) * 2);
+	color:var(--ThemeColor2);
 }
 
 /* Contenedor principal */

@@ -41,7 +41,7 @@ if (isset($entidad) && !empty($entidad) && in_array($entidad, $mmodelo))
 				
 				foreach ($mfiltrosKeys as $mkey)
 				{
-					if (isset($$mkey) && !empty($$mkey))
+					if (isset($$mkey) && $$mkey !== "")
 					{
 						$mfiltros[$mkey]	= $$mkey;
 					}
@@ -75,6 +75,7 @@ if (isset($entidad) && !empty($entidad) && in_array($entidad, $mmodelo))
 					$mresult	= $mjson;
 				}
 				$_RESULT["datos"]	= $mresult;
+				$_RESULT["error"]	= false;	// Resetea el error por ahora.
 			}
 			else
 			{

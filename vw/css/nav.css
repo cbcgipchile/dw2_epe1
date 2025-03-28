@@ -9,9 +9,11 @@
 
 NAV
 {
+	display:block;
 	position:relative;
 	z-index:9;
-	width:100vw;
+	width:100%;
+	max-width:100vw;
 	min-width:var(--ClientMinWidth, 360px);
 	height:var(--NavHeight);
 	background-color:var(--ThemeColor1);
@@ -19,29 +21,130 @@ NAV
 	text-align:right;
 }
 
-NAV [data-id="menu"]
+NAV [data-type="menu"]
 {
 	list-style-type:none;
 	margin:0 var(--MarginLateral);
 }
 
 /* Items de menu */
-NAV [data-id="menu"] [data-type="item"]
+NAV [data-type="menu"] [data-type="item"]
 {
 	display:inline-block;
-	padding:0 15px;
-	cursor:pointer;
-	line-height:var(--NavHeight);
 	text-transform:uppercase;
 	text-align:center;
 	color:var(--ThemeColor6);
 }
-NAV [data-id="menu"] [data-type="item"]:hover,
-NAV [data-id="menu"] [data-type="item"].activada
+NAV [data-type="menu"] [data-type="item"] A
+{
+	display:block;
+	padding:0 15px;
+	line-height:var(--NavHeight);
+	color:var(--ThemeColor6);
+}
+NAV [data-type="menu"] [data-type="item"]:hover,
+NAV [data-type="menu"] [data-type="item"].activada
 {
 	background-color:var(--ThemeColor2);
-	color:var(--ThemeColor0);
+	color:var(--ThemeColor0) !important;
+}
+NAV.visible [data-id="menu_btn"]
+{
+	display:none;
 }
 
 
+/* 
+-----------------------------
+Pantallas Chicas 
+-----------------------------
+*/
+@media (max-width:640px)
+{
+	NAV
+	{
+		display:block;
+		position:fixed;
+		z-index:11;
+		width:100%;
+		height:auto;
+		font-size:1.2rem;
+		-webkit-box-shadow:0 3px 6px rgba(0,0,0,0.5);
+		-moz-box-shadow:0 3px 6px rgba(0,0,0,0.5);
+		box-shadow:0 3px 6px rgba(0,0,0,0.5);
+	}
+	NAV.oculta
+	{
+		animation-iteration-count: 1;
+		animation-timing-function: ease-in;
+		animation-duration: 500ms;	
+		animation-name: menu_hide;
+		bottom:calc(100vh + 6px);
+	}
+	NAV.visible
+	{
+		animation-iteration-count: 1;
+		animation-timing-function: ease-in;
+		animation-duration: 500ms;	
+		animation-name: menu_show;
+		top:0;
+	}
+	NAV.visible [data-type="menu"]
+	{
+		width:100%;
+		margin:0;
+	}
+	NAV.visible [data-type="menu"] [data-type="item"]
+	{
+		width:100%;
+		display:block;
+		margin:0;
+	}
+	NAV [data-type="menu"] [data-type="item"] A
+	{
+		line-height:var(--MenuItemHeight);
+		padding:15px 0;
+	}
+	
+	NAV.visible [data-id="menu_btn"]
+	{
+		display:inline-block;
+		width:var(--HeaderMenuButtonWidth, 30px);
+		height:var(--HeaderMenuButtonWidth, 30px);
+		margin:var(--MarginLateral) var(--MarginLateral) 0 0;
+		background-image:url("../img/icon_cerrar.png");
+		background-repeat:no-repeat;
+		background-position:center;
+		background-size:auto 60%;
+		border-radius:4px;
+		cursor:pointer;
+	}
+	NAV.visible [data-id="menu_btn"]:hover
+	{
+		background-color:var(--ThemeColor0);
+	}
+}
 
+/* Configuracion de Animaciones: */
+@keyframes menu_show
+{
+	0%
+	{
+		transform:translateY(calc(calc(100vh + 6px) * (-1)));
+	}
+	100%
+	{
+		transform:translateY(0);
+	}
+}
+@keyframes menu_hide
+{
+	0%
+	{
+		transform:translateY(0);
+	}
+	100%
+	{
+		transform:translateY(calc(calc(100vh + 6px) * (-1)));
+	}
+}

@@ -10,7 +10,7 @@
 {
 	/* Paleta de Colores */
 	--ThemeColor0	: #FFF;
-	--ThemeColor6	: #6A6C58;
+	--ThemeColor6	: #5A5C48;
 	/* --> Paleta extraida de https://www.color-hex.com/color-palette/1057237 */
 	--ThemeColor1	: #bfdcd2; /* (191,220,210) */
 	--ThemeColor2	: #95d4c6; /* (149,212,198) */
@@ -20,11 +20,15 @@
 	
 	/* Fuentes de Texto */
 	--FontFace	: "Trebuchet MS", "Arial Narrow", "Arial", sans-serif;
-	--FontSize	: 11pt;
+	--FontSize	: 12pt;
+	--SeccionItemSize	: 14pt;
 	
 	/* Dimensiones varias */
-	--HeaderHeight	: 90px;
-	--NavHeight		: 90px;
+	--HeaderHeight			: 90px;
+	--HeaderMenuButtonWidth	: 60px;
+	
+	--NavHeight				: 90px;
+	--MenuItemHeight		: 45px;
 	
 	--ClientMinWidth: 360px;
 	--MarginLateral	: 45px;
@@ -32,11 +36,19 @@
 	--NumeroPhi		: calc(calc(1 + sqrt(5)) / 2);
 }
 
-/* Pantallas Chicas */
+/* Otras dimensiones de Pantallas */
+@media (min-width:480.1px) and (max-width:640px)
+{
+	:root
+	{
+		--MarginLateral	: 30px;
+	}
+}
 @media (max-width:480px)
 {
 	:root
 	{
-		--MarginLateral: 20px;
+		--MarginLateral	: 20px;
+		--MenuItemHeight: 30px;
 	}
 }

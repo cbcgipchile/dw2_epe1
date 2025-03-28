@@ -5,11 +5,12 @@
   "id_seccion"		:"home",
   "id_item_padre"	:0,
   "codigo"			:"presentacion",
-  "nombre"			:"Presentacion",
+  "nombre"			:"Le damos la bienvenida a nuestro portafolio",
   "orden"			:1,
   "parametros"		:
   [
-   { "id_param":"contenido", "valor":"Les damos la bienvenida a nuestro portafolio. Somos Jorge Corvalán y Carolina Casanova, profesionales del área informática, y estamos acá para ayudarle en su próximo proyecto digital." }
+   { "id_param":"descripcion", "valor":"Somos Jorge Corvalán y Carolina Casanova, profesionales del área informática, y estamos acá para ayudarle en su próximo proyecto digital." },
+   { "id_param":"url_portada", "valor":"./vw/img/icon_solution.png" }
   ]
  },
  {
@@ -123,10 +124,11 @@
   "codigo"			:"contact-form",
   "nombre"			:"Formulario de Contacto",
   "orden"			:1,
+  "tiene_hijos"		:1,
   "parametros"		:
   [
-   { "id_param":"descripcion", "valor":"¿Necesitas una asesoría web, o tal vez desarrollar una aplicación web para tu empresa o emprendimiento? Contáctame utilizando este formulario. Gracias por tu interés." },
-   { "id_param":"url_portada", "valor":"./img/contact-form.jpg" }
+   { "id_param":"descripcion", "valor":"¿Necesita una asesoría web, o tal vez desarrollar una aplicación web para su empresa o emprendimiento? Contáctenos utilizando este formulario. Gracias por su interés." },
+   { "id_param":"url_portada", "valor":"./vw/img/icon_contact-form.png" }
   ]
  },
  {
@@ -139,6 +141,7 @@
   "orden"			:1,
   "parametros"		:
   [
+   { "id_param":"field_name", "valor":"nombre" },
    { "id_param":"field_type", "valor":"text" },
    { "id_param":"field_length", "valor":50 },
    { "id_param":"field_required", "valor":1 }
@@ -154,6 +157,7 @@
   "orden"			:2,
   "parametros"		:
   [
+   { "id_param":"field_name", "valor":"email" },
    { "id_param":"field_type", "valor":"email" },
    { "id_param":"field_length", "valor":150 },
    { "id_param":"field_required", "valor":1 }
@@ -169,6 +173,7 @@
   "orden"			:3,
   "parametros"		:
   [
+   { "id_param":"field_name", "valor":"mensaje" },
    { "id_param":"field_type", "valor":"textarea" },
    { "id_param":"field_length", "valor":1024 },
    { "id_param":"field_required", "valor":1 }
