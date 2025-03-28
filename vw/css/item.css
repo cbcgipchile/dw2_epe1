@@ -60,7 +60,7 @@ ARTICLE[data-type="item_padre"] > [data-type="imagen"] .imagen:focus
     -o-transform: scale(1.1);
     transform: scale(1.1);
 }
-ARTICLE[data-type="item_padre"] > [data-type="imagen"].icon
+ARTICLE[data-type="item_padre"] > [data-type="imagen"].icon .imagen
 {
 	background-size:auto 90%;
 	background-color:var(--ThemeColor3);
