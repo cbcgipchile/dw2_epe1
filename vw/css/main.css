@@ -30,3 +30,13 @@ MAIN > SECTION
 {
 	padding-bottom:var(--MarginLateral);
 }
+MAIN > SECTION.carga
+{
+	height:54px;
+	padding:15px 0;
+	background-color:var(--ThemeColor3);
+	background-image:url("../img/icon_carga.gif");
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:24px auto;
+}

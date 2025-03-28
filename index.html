@@ -42,7 +42,7 @@
 		</nav>
 		
 		<main>
-			<h2 data-id="titulo" id="tituloSeccion">Inicio</h2>
+			<h2 data-id="titulo" id="tituloSeccion"></h2>
 			<section data-id="contenido" id="contenidoSeccion" data-id="">
 
 			</section>
@@ -69,9 +69,9 @@
 			
 			<!-- Plantilla Item de Seccion -->
 			<template data-id="seccion_item">
-				<article data-type="item" data-id=""><!--
+				<article data-type="item_padre" data-id=""><!--
 				--><figure data-type="imagen">
-						<img src="" alt="Imagen" />
+						<div class="imagen"><img src="" alt="Imagen" /></div>
 					</figure><!--
 				--><div data-type="texto"><!--
 					--><h3 data-field="nombre"></h3><!--
@@ -84,7 +84,7 @@
 			
 			<!-- Plantilla Contenedor e Item de Hijos de Item -->
 			<template data-id="seccion_hijos">
-				<article data-type="hijos" data-id="">
+				<article data-type="item_hijos" data-id="">
 					<figure data-type="item" data-id="">
 						<figcaption data-field="nombre"><a target="_blank"></a></figcaption>
 					</figure>
@@ -93,17 +93,23 @@
 			
 			<!-- Plantilla Contenedor e Item de Form de Item -->
 			<template data-id="seccion_form">
-				<article data-type="form" data-id="">
+				<article data-type="item_form" data-id="">
 					<form name="">
-						<div class="field" data-type="text" data-id="">
-							<label for=""></label>
-							<input type="text" name="" id="" value="" />
+						<div data-type="fields">
+							<div class="field" data-type="text" data-id="">
+								<label for=""><span></span> <span class="required" title="Requerido">*</span></label>
+								<input type="text" name="" id="" value="" data-type="control" />
+							</div>
+							<div class="field" data-type="email" data-id="">
+								<label for=""><span></span> <span class="required" title="Requerido">*</span></label>
+								<input type="email" name="" id="" value="" data-type="control" />
+							</div>
+							<div class="field" data-type="textarea" data-id="">
+								<label for=""><span></span> <span class="required" title="Requerido">*</span></label>
+								<textarea name="" id="" size="6" data-type="control"></textarea>
+							</div>
 						</div>
-						<div class="field" data-type="textarea" data-id="">
-							<label for=""></label>
-							<textarea name="" id="" size="6"></textarea>
-						</div>
-						<div class="buttons">
+						<div data-type="buttons">
 							<input type="submit" value="Enviar" />
 						</div>
 					</form>

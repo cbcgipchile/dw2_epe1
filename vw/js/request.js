@@ -42,7 +42,7 @@ var ccRequest	=
 		{
 			try
 			{
-				console.log("[conectado]", response, params);
+				// console.log("[conectado]", response, params);
 				
 				// Verifica errores:
 				if (response.status.type != "ok")

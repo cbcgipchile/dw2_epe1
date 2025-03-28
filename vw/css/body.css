@@ -25,9 +25,31 @@ BODY
 
 A
 {
-	color:var(--ThemeColor0);
+	color:var(--ThemeColor6);
 	text-decoration:none;
 }
+
+/* Scrollbars */
+::-webkit-scrollbar 
+{
+	width:16px;
+	cursor:pointer;
+}
+::-webkit-scrollbar-track
+{
+	background:var(--ThemeColor0, #FFF);
+}
+::-webkit-scrollbar-thumb 
+{
+	background:var(--ThemeColor1, #999);
+	border-radius:8px;
+}
+::-webkit-scrollbar-thumb:hover
+{
+	background:var(--ThemeColor2, #AAA);
+	cursor:pointer;
+}
+
 
 /* Estilos compartidos */
 .oculta

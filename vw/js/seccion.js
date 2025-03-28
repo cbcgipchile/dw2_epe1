@@ -19,6 +19,26 @@ var ccSeccion =
 		templates		: {},	// Plantillas de contenido
 	},
 	
+	form	:
+	{
+		enviar	: function(event)
+		{
+			event.preventDefault();
+			console.log("[enviar]", event);
+			
+			return false;
+		},
+	},
+	
+	/*
+	-----------------------------------
+	@about	Carga galeria de items hijos de otro item.
+	@date	27/03/2025
+	*/
+	cargarHijos	: function(response)
+	{
+		console.log("[cargarHijos]", response);
+	},
 	/*
 	-----------------------------------
 	@about	Carga el formulario con los campos de item recibidos.
@@ -26,7 +46,125 @@ var ccSeccion =
 	*/
 	cargarForm	: function(response)
 	{
-		console.log("[cargarForm]", response);
+		// console.log("[cargarForm]", response);
+		try
+		{
+			if (response != "")
+			{
+				var data	= JSON.parse(response);
+				if (data)
+				{
+					// console.log(data);
+					if (data.error === false)
+					{
+						var items	= data.datos;
+						if (items.length > 0)
+						{
+							// console.log(items);
+							
+							var id_item_padre	= items[0].id_item_padre;
+							
+							// 1. Busca el contenedor de form del item padre:
+							var contSec	= ccSeccion.dom.contenedor || document.querySelector('MAIN > [data-id="contenido"]');
+							var contForm	= contSec.querySelector('[data-type="item_form"][data-id="' + id_item_padre + '"]');
+							var cont		= contForm.querySelector('[data-type="fields"]');
+							
+							// console.log(id_item_padre, cont);
+							
+							if (cont)
+							{
+								// Obtiene los contenedores de campo segun su tipo:
+								var tempFields	= cont.querySelectorAll('.field');
+								var tempCampos	= {};
+								if (tempFields.length)
+								{
+									tempFields.forEach(function(elem)
+										{
+											tempCampos[elem.dataset.type]	= elem.cloneNode(true);
+										}
+									);
+								}
+								
+								// console.log(tempCampos);
+								
+								// Si hay plantillas de tipos de campo:
+								if (Object.keys(tempCampos).length > 0)
+								{
+									// Limpia el contenedor de campos:
+									cont.innerHTML	= "";
+									
+									// 2. Recorre items recibidos:
+									for (var f = 0; f < items.length; f++)
+									{
+										// console.log(f, items[f]);
+										try
+										{
+											// Obtiene metadatos:
+											var params	= {};
+											for (var p = 0; p < items[f].parametros.length; p++)
+											{
+												var key	= items[f].parametros[p].id_param;
+												if (key.substr(0, 6) == "field_")
+												{
+													params[key]	= items[f].parametros[p].valor;
+												}
+											}
+											// console.log(params);
+											
+											// var tempClon	= tempCampos[params.field_type].cloneNode(true);
+											var nuevoItem	= tempCampos[params.field_type].cloneNode(true);
+											
+											// console.log(nuevoItem);
+											if (nuevoItem)
+											{
+												nuevoItem.dataset.id	= items[f].id_item;
+												
+												var idControl	= "item_form_" + id_item_padre + "_" + items[f].id_item;
+												
+												var label	= nuevoItem.querySelector('LABEL');
+												label.querySelector('SPAN').innerHTML	= items[f].nombre;
+												label.setAttribute("for", idControl);
+												
+												var control	= nuevoItem.querySelector('[data-type="control"]');
+												control.id	= idControl;
+												if (params.field_required)
+												{
+													control.setAttribute("required", true);
+												}
+												else
+												{
+													label.removeChild(label.querySelector(".required"));
+												}
+												
+												cont.appendChild(nuevoItem);
+												// console.log(nuevoItem);
+											}
+										}									
+										catch (exc2)
+										{
+											console.log(f, exc2);
+										}
+									} // ---Fin For Items---
+									
+									// Aplica manejador de Envio de formulario:
+									contForm.querySelector("FORM").addEventListener("submit", ccSeccion.form.enviar);
+									
+									contForm.classList.remove("oculta");
+								}
+							}
+						}
+					}
+					else
+					{
+						ccRequest.mensaje.mostrar("resultado", "error", data.error);
+					}
+				}
+			}
+		}
+		catch (exc)
+		{
+			console.log("x Error:", exc);
+		}
 	},
 	/*
 	-----------------------------------
@@ -66,20 +204,16 @@ var ccSeccion =
 								// Vacia el contenedor:
 								cont.innerHTML	= "";
 								
-								// Campos a obtener:
-								var campos	= ["nombre", "descripcion"];
-								
 								// Recorre items recibidos:
 								for (var f = 0; f < items.length; f++)
 								{
 									// console.log(f, items[f]);
-									
 									try
 									{
 										var tempClon	= temp.content.cloneNode(true);
-										var nuevoItem	= tempClon.querySelector('[data-type="item"]');
+										var nuevoItem	= tempClon.querySelector('[data-type="item_padre"]');
 										
-										// console.log(nuevoItem);
+										// console.log(items[f], nuevoItem);
 										if (nuevoItem)
 										{
 											// Asigna valores al contenido del item:
@@ -104,16 +238,18 @@ var ccSeccion =
 												// Sector Imagen:
 
 												// - Averigua si hay una imagen asociada:
+												var urlImg	= "./vw/img/icon_solution.png";
 												if (meta.url_portada
 													&& meta.url_portada != "")
 												{
-													figure.style.backgroundImage	= 'url("' + meta.url_portada + '")';
-													figure.querySelector("IMG").src	= meta.url_portada;
-													
-													if (meta.url_portada.toLowerCase().indexOf(".png") > -1)
-													{
-														figure.classList.add("icon");
-													}
+													urlImg	= meta.url_portada;
+												}
+												figure.querySelector(".imagen").style.backgroundImage	= 'url("' + urlImg + '")';
+												figure.querySelector("IMG").src	= urlImg;
+												
+												if (urlImg.toLowerCase().indexOf(".png") > -1)
+												{
+													figure.classList.add("icon");
 												}
 												
 												// Sector Texto:
@@ -140,9 +276,25 @@ var ccSeccion =
 												var f_url	= texto.querySelector('[data-field="url"]');
 												if (f_url)
 												{
-													if (meta.url && meta.url != "")
+													if (meta.url_value 
+														&& meta.url_value != "")
 													{
-														f_url.querySelector('A').href	= meta.url;
+														var f_url_link	= f_url.querySelector('A');
+														if (f_url_link)
+														{
+															f_url_link.href	= meta.url_value;
+														
+															if (meta.url_text 
+																&& meta.url_text != "")
+															{
+																f_url_link.title		= meta.url_text;
+																f_url_link.innerHTML	= meta.url_text;
+															}
+															if (meta.url_target)
+															{
+																f_url_link.target		= meta.url_target;
+															}
+														}
 													}
 													else
 													{
@@ -160,15 +312,19 @@ var ccSeccion =
 												// Agrega el item al contenedor:
 												cont.appendChild(nuevoItem);
 												
+												// console.log(f, nuevoItem, cont, cont.innerHTML);
+												
 												// En caso de que el item tenga hijos:
 												if (items[f].tiene_hijos != undefined
 													&& items[f].tiene_hijos)
 												{
 													// Inicia el contenedor para los hijos a partir de plantilla:
 													var tempHijos;
+													var tipoHijo	= "hijos";
 													if (items[0].id_tipo == "form")
 													{
 														tempHijos	= ccSeccion.dom.templates.seccion_form;
+														tipoHijo	= "form";
 													}
 													else
 													{
@@ -178,23 +334,28 @@ var ccSeccion =
 													if (tempHijos)
 													{
 														var tempHijosClon	= tempHijos.content.cloneNode(true);
-														var contHijos		= tempHijosClon.querySelector('[data-type="item"]');
+														var contHijos		= tempHijosClon.querySelector('[data-type="item_' + tipoHijo + '"]');
+														
+														// console.log(contHijos);
 														
 														if (contHijos)
 														{
+															contHijos.dataset.id	= items[f].id_item;
 															// Lo oculta mientras se solicitan y cargan sus valores:
-															// contHijos.classList.add("oculta");
+															contHijos.classList.add("oculta");
 															
 															// Lo agrega a continuacion del item padre:
 															cont.appendChild(contHijos);
-														}
+															
+															// console.log(contHijos, cont, cont.innerHTML);
 														
-														// Si es tipo "form", solicita los campos de formulario del item;
-														// De lo contrario, solicita los hijos para mostrarlos como galeria.
-														ccSeccion.solicitar(
-															items[0].id_seccion, 
-															items[0].id_item, 
-															items[0].id_tipo);
+															// Si es tipo "form", solicita los campos de formulario del item;
+															// De lo contrario, solicita los hijos para mostrarlos como galeria.
+															ccSeccion.solicitar(
+																items[0].id_seccion, 
+																items[0].id_item, 
+																items[0].id_tipo);
+														}
 													}
 												}
 											}
@@ -204,7 +365,9 @@ var ccSeccion =
 									{
 										console.log(f, exc2);
 									}
-								}
+								} // ---Fin For Items---
+								
+								cont.classList.remove("carga");
 							}
 						}
 					}
@@ -231,16 +394,29 @@ var ccSeccion =
 		{
 			if (id && id != "")
 			{
-				console.log("[solicitar]", id, id_item_padre, id_tipo);
+				// console.log("[solicitar]", id, id_item_padre, id_tipo);
 				
+				// Refresca area de contenido:
+				var titulo	= ccMenu.menu.items[id].nombre;
+				if (titulo)
+				{
+					ccSeccion.dom.titulo.innerHTML	= titulo;
+					ccSeccion.dom.contenedor.classList.add("carga");
+					// ccSeccion.dom.contenedor.innerHTML	= "";
+				}
+				
+				// Valores por defecto, si no vienen por parametro:
 				id_item_padre	= (id_item_padre == undefined ? 0: id_item_padre);
 				var callback	= (id_tipo != undefined && id_tipo != "" ? (id_tipo == "form" ? ccSeccion.cargarForm: ccSeccion.cargarHijos): ccSeccion.cargar);
+				
+				// Parametros a enviar a solicitud:
 				var params		= { 
 						entidad			:"item_seccion", 
 						id_seccion		:id, 
 						"id_item_padre"	:id_item_padre
 					};
-				console.log(params);
+				// console.log(params);
+				// Solicitud enviada:
 				ccRequest.solicitar(params, callback);
 			}
 		}

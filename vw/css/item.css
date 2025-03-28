@@ -22,31 +22,54 @@ ARTICLE
 	background-color:var(--ThemeColor3);
 }
 
-ARTICLE > *
+/* 
+-----------------------------
+Contenedor de ITEM Padre 
+-----------------------------
+*/
+ARTICLE[data-type="item_padre"] > *
 {
 	display:inline-block;
-	/* background-color:green; */
 }
 
-ARTICLE > [data-type="imagen"]
+ARTICLE[data-type="item_padre"] > [data-type="imagen"]
 {
+	width:calc(100% / calc(var(--NumeroPhi) + 1));
+	height:33vh;
+	overflow:hidden;
+	text-align:center;
+}
+ARTICLE[data-type="item_padre"] > [data-type="imagen"] .imagen
+{
+	width:100%;
+	height:100%;
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:cover;
-	width:calc(100% / calc(var(--NumeroPhi) + 1));
-	height:33vh;
-	text-align:center;
+	-webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
 }
-ARTICLE > [data-type="imagen"].icon
+ARTICLE[data-type="item_padre"] > [data-type="imagen"] .imagen:hover,
+ARTICLE[data-type="item_padre"] > [data-type="imagen"] .imagen:focus
+{
+	-ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+ARTICLE[data-type="item_padre"] > [data-type="imagen"].icon
 {
 	background-size:auto 90%;
 	background-color:var(--ThemeColor3);
 }
-ARTICLE > [data-type="imagen"] IMG
+ARTICLE[data-type="item_padre"] > [data-type="imagen"] IMG
 {
 	display:none;
 }
-ARTICLE > [data-type="texto"]
+ARTICLE[data-type="item_padre"] > [data-type="texto"]
 {
 	width:calc(100% 
 			- calc(100% / calc(var(--NumeroPhi) + 1)) 
@@ -57,17 +80,34 @@ ARTICLE > [data-type="texto"]
 	font-size:var(--SeccionItemSize, 14pt);
 	overflow:auto;
 }
+ARTICLE[data-type="item_padre"] > [data-type="texto"] [data-field="url"]
+{
+	display:inline-block;
+	background-color:var(--ThemeColor1);
+	border-radius:4px;
+}
+ARTICLE[data-type="item_padre"] > [data-type="texto"] [data-field="url"]:hover
+{
+	background-color:var(--ThemeColor2);
+}
+ARTICLE[data-type="item_padre"] > [data-type="texto"] [data-field="url"] A
+{
+	display:inline-block;
+	line-height:var(--BotonHeight, 45px);
+	padding:0 15px;
+}
 
-ARTICLE.reverso
+/* Intercambia posicion de elementos horizontalmente */
+ARTICLE[data-type="item_padre"].reverso
 {
 	clear:both;
 	background-color:transparent;
 }
-ARTICLE.reverso > [data-type="imagen"]
+ARTICLE[data-type="item_padre"].reverso > [data-type="imagen"]
 {
 	float:right;
 }
-ARTICLE.reverso > [data-type="texto"]
+ARTICLE[data-type="item_padre"].reverso > [data-type="texto"]
 {
 	float:left;
 }
@@ -78,12 +118,71 @@ ARTICLE .clear
 }
 
 
-/* Pantallas Chicas */
+/* 
+-----------------------------
+Contenedor de ITEM Form
+-----------------------------
+*/
+ARTICLE[data-type="item_form"]
+{
+	width:calc(100% - calc(var(--MarginLateral) * 2));
+	height:auto;
+	padding:var(--MarginLateral);
+	background-color:transparent;
+	font-size:var(--SeccionItemSize, 14pt);
+}
+ARTICLE[data-type="item_form"] .field
+{
+	display:block;
+}
+ARTICLE[data-type="item_form"] .field LABEL,
+ARTICLE[data-type="item_form"] .field [data-type="control"]
+{
+	display:block;
+	margin:15px 0 10px;
+	width:calc(100% - 30px);
+}
+ARTICLE[data-type="item_form"] .field LABEL .required
+{
+	color:red;
+}
+ARTICLE[data-type="item_form"] .field [data-type="control"]
+{
+	font-size:inherit;
+	color:var(--ThemeColor6);
+	background-color:var(--ThemeColor4);
+	border-bottom:1px solid var(--ThemeColor5);
+	padding:15px;
+}
+ARTICLE[data-type="item_form"] [data-type="buttons"]
+{
+	text-align:center;
+	padding:var(--MarginLateral) 0;
+}
+ARTICLE[data-type="item_form"] INPUT[type="submit"]
+{
+	background-color:var(--ThemeColor1);
+	border-radius:4px;
+	padding:15px;
+	font-size:inherit;
+	cursor:pointer;
+}
+
+
+/*
+---------------------------------------
+ Pantallas Chicas 
+---------------------------------------
+*/
 @media (max-width:480px)
 {
 	ARTICLE
 	{
 		height:auto !important;
+		-webkit-box-shadow:0 3px 6px rgba(0,0,0,0.5);
+		-moz-box-shadow:0 3px 6px rgba(0,0,0,0.5);
+		box-shadow:0 3px 6px rgba(0,0,0,0.5);
+		margin-bottom:6px;
 	}
 	
 	ARTICLE > *
@@ -92,11 +191,15 @@ ARTICLE .clear
 		width:100% !important;
 	}
 	
-	ARTICLE > [data-type="imagen"]
+	ARTICLE[data-type="item_padre"] > [data-type="imagen"]
 	{
-		height:50vh;
+		height:40vh;
 	}
-	ARTICLE > [data-type="texto"]
+	ARTICLE[data-type="item_padre"] > [data-type="imagen"].icon
+	{
+		background-size:50% auto;
+	}
+	ARTICLE[data-type="item_padre"] > [data-type="texto"]
 	{
 		width:calc(100% - calc(var(--MarginLateral) * 2)) !important;
 		height:auto;

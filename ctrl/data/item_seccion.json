@@ -10,7 +10,10 @@
   "parametros"		:
   [
    { "id_param":"descripcion", "valor":"Somos Jorge Corvalán y Carolina Casanova, profesionales del área informática, y estamos acá para ayudarle en su próximo proyecto digital." },
-   { "id_param":"url_portada", "valor":"./vw/img/icon_solution.png" }
+   { "id_param":"url_portada", "valor":"./vw/img/icon_solution.png" },
+   { "id_param":"url_value", "valor":"./?contact" },
+   { "id_param":"url_text", "valor":"Contáctenos" },
+   { "id_param":"url_target", "valor":"_self" }
   ]
  },
  {
@@ -67,7 +70,7 @@
   "fecha_creacion"	:"2021-09-10",
   "parametros"		:
   [
-   { "id_param":"url", "valor":"https://www.geminis.cl/" },
+   { "id_param":"url_value", "valor":"https://www.geminis.cl/" },
    { "id_param":"descripcion", "valor":"Diseño gráfico web sobre plataforma WordPress 5.9 para el sitio corporativo de empresa de Transportes Géminis, Calama. Incluye desarrollo de plantillas (themes), plugins varios y administración de contenidos." },
    { "id_param":"url_portada", "valor":"./img/experience-geminis-corporativo.jpg" }
   ]
@@ -83,7 +86,7 @@
   "fecha_creacion"	:"2019-10-28",
   "parametros"		:
   [
-   { "id_param":"url", "valor":"https://www.cirugialaserena.cl/" },
+   { "id_param":"url_value", "valor":"https://www.cirugialaserena.cl/" },
    { "id_param":"descripcion", "valor":"Diseño y desarrollo fullstack del sitio corporativo del Centro Médico Mistral, La Serena. Incluye interfaz de administración para usuarios autorizados." },
    { "id_param":"url_portada", "valor":"./img/experience-mistral-corporativo.jpg" }
   ]
@@ -164,7 +167,7 @@
   ]
  },
  {
-  "id_item"			:302,
+  "id_item"			:303,
   "id_tipo"			:"field",
   "id_seccion"		:"contact",
   "id_item_padre"	:30,

@@ -46,6 +46,10 @@ FOOTER [data-id="footer_menu"] [data-type="menu"] [data-type="item"]
 	cursor:pointer;
 	line-height:var(--MenuItemHeight);
 }
+FOOTER [data-id="footer_menu"] [data-type="menu"] [data-type="item"] A
+{
+	color:var(--ThemeColor0);
+}
 FOOTER [data-id="footer_menu"] [data-type="menu"] [data-type="item"]:hover
 {
 	text-decoration:underline;

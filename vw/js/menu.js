@@ -25,7 +25,94 @@ var ccMenu =
 	menu	:
 	{
 		items	: {},	// Almacena en memoria la lista de items de menu.
-		
+		actual	: "",	// ID Seccion activa.
+
+		/*
+		-----------------------------------
+		@about	Retorna seccion que esta activa actualmente.
+		@date	28/03/2025
+		@return	string
+		*/
+		obtenerActual	: function()
+		{
+			var id	= "";
+			try
+			{
+				// 1. Busca la seccion en el URL de la ventana:
+				var query	= new URLSearchParams(window.location.search);
+				// console.log(query, query.size, query.entries);
+				if (query.size > 0)
+				{
+					var f = 0;
+					for (var par of query.entries())
+					{
+						if (f > 0)
+						{	break;	}
+						id	= par[0];
+						f++;
+					}
+				}
+				// 2. Busca la seccion a partir del item de menu activo:
+				if (id == "")
+				{
+					var itemSel	= document.querySelector('[data-type="menu"] [data-type="item"].activada');
+					if (itemSel)
+					{
+						id	= itemSel.dataset.id;
+					}
+				}
+				// 3. Si no encontro la seccion, usa el valor por defecto:
+				if (id == "")
+				{
+					id	= "home";
+				}
+				// 4. Destaca la seccion encontrada:
+				
+			}
+			catch (exc)
+			{
+				console.log("x Error:", exc);
+			}
+			return id;
+		},
+		/*
+		-----------------------------------
+		@about	Destaca item de menu NAV especificado por su id.
+		@date	28/03/2025
+		@return	id	string ID Seccion
+		*/
+		destacar	: function(id)
+		{
+			try
+			{
+				if (id && id != "")
+				{
+					// Tareas para destacar al item actual:
+					var items	= ccMenu.dom.nav.querySelectorAll('[data-type="menu"] [data-type="item"]');
+					if (items.length > 0)
+					{
+						items.forEach(function(itm)
+							{
+								// Destaca el menu clicado:
+								if (itm.dataset.id == id)
+								{
+									itm.classList.add("activada");
+								}
+								// Desmarca todos los otros items de menu:
+								else
+								{
+									itm.classList.remove("activada");
+								}
+							}
+						);
+					}
+				}
+			}
+			catch (exc)
+			{
+				console.log("x Error:", exc);
+			}
+		},
 		/*
 		-----------------------------------
 		@about	Muestra/Oculta el menu (solo pantallas chicas)
@@ -129,7 +216,9 @@ var ccMenu =
 									}
 								}
 								// Solicita la info de la seccion de Inicio:
-								ccSeccion.solicitar("home");
+								ccMenu.menu.actual	= ccMenu.menu.obtenerActual();
+								ccMenu.menu.destacar(ccMenu.menu.actual);
+								ccSeccion.solicitar(ccMenu.menu.actual);
 							}
 						}
 					}
@@ -149,7 +238,7 @@ var ccMenu =
 		},
 		/*
 		-----------------------------------
-		@about	Carga la lista de items en los menus del DOM.
+		@about	Solicita la lista de items del menu clicado.
 		@date	27/03/2025
 		*/
 		ir : function(event)
@@ -161,32 +250,13 @@ var ccMenu =
 				var id		= item.dataset.id;
 				if (id && id != "")
 				{
-					// Tareas para destacar al item actual:
-					var parent	= item.closest('[data-type="menu"]');
-					if (parent)
-					{
-						var items	= parent.querySelectorAll('[data-type="item"]');
-						if (items.length > 0)
-						{
-							items.forEach(function(itm)
-								{
-									// Destaca el menu clicado:
-									if (itm.dataset.id == id)
-									{
-										itm.classList.add("activada");
-									}
-									// Desmarca todos los otros items de menu:
-									else
-									{
-										itm.classList.remove("activada");
-									}
-								}
-							);
-						}
-					}
+					window.history.pushState({}, "", item.href);
+					
+					// Destaca el menu clicado:
+					ccMenu.menu.destacar(id);
 					
 					// Oculta el menu (si es desplegable):
-					var menuCont	= parent.parentElement;
+					var menuCont	= item.closest('[data-type="menu"]').parentElement;
 					if (menuCont.nodeName.toUpperCase() == "NAV"
 						&& menuCont.classList.contains("visible"))
 					{
