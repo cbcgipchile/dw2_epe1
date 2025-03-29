@@ -15,7 +15,7 @@ var ccRequest	=
 	*/
 	dom	:
 	{
-		msjes	: { carga:null, resultado:null, },
+		msje	: null,
 	},
 	
 	/*
@@ -47,7 +47,7 @@ var ccRequest	=
 				// Verifica errores:
 				if (response.status.type != "ok")
 				{
-					ccRequest.mensaje.mostrar("resultado", "error", response.status.message);
+					ccRequest.mensaje.mostrar("error", response.status.message);
 				}
 				else
 				{
@@ -71,7 +71,7 @@ var ccRequest	=
 		*/
 		error	: function(response)
 		{
-			ccRequest.mensaje.mostrar("resultado", "error", response);
+			ccRequest.mensaje.mostrar("error", response);
 		},
 		/*
 		-----------------------------------
@@ -93,23 +93,21 @@ var ccRequest	=
 		-----------------------------------
 		@about	Muestra mensaje especificado.
 		@date	27/03/2025
-		@param	id		String	Identificador del contenedor de mensaje
-		@param	tipo	String	Valores: "error", "exito", ""(defecto)
+		@param	tipo	String	Valores: "error", "exito", "carga", ""(defecto)
 		@param	texto	String	Opcional. Contenido del mensaje.
 		*/
-		mostrar	: function(id, tipo, texto)
+		mostrar	: function(tipo, texto)
 		{
-			if (id != "" && ccRequest.dom.msjes[id])
+			if (ccRequest.dom.msje)
 			{
-				ccRequest.dom.msjes[id].classList.remove("oculta");
+				ccRequest.dom.msje.className	= "mensaje oculta";
 				if (tipo && tipo != "")
 				{
-					ccRequest.dom.msjes[id].classList.add(tipo);
+					ccRequest.dom.msje.classList.add(tipo);
 				}
-				if (texto && texto != "")
-				{
-					ccRequest.dom.msjes[id].innerHTML	= '<p>' + texto + '</p>';
-				}
+				texto	= (tipo == "carga" ? "Espere, por favor...": texto);
+				ccRequest.dom.msje.innerHTML	= '<p>' + texto + '</p>';
+				ccRequest.dom.msje.classList.remove("oculta");
 			}
 		},
 		/*
@@ -117,11 +115,11 @@ var ccRequest	=
 		@about	Oculta mensaje especificado.
 		@date	27/03/2025
 		*/
-		ocultar	: function(id)
+		ocultar	: function()
 		{
-			if (id != "" && ccRequest.dom.msjes[id])
+			if (ccRequest.dom.msje)
 			{
-				ccRequest.dom.msjes[id].classList.add("oculta");
+				ccRequest.dom.msje.classList.add("oculta");
 			}
 		},
 	},
@@ -136,7 +134,7 @@ var ccRequest	=
 		try
 		{
 			// console.log("[solicitar]", params, callback);
-			var conx	= new QAsinc("req.php", 0, params);
+			var conx	= new QAsinc("req.php", 0, params, "POST");
 			conx.setCallback("iniciado", ccRequest.callbacks.iniciado);
 			conx.setCallback("error", function(resp) 
 				{
@@ -169,30 +167,26 @@ var ccRequest	=
 	inicializar	: function()
 	{
 		// console.log("[inicializar]");
-		var msjes	= document.querySelectorAll('[data-type="mensaje_request"]');
-		if (msjes.length > 0)
+		var msje	= document.querySelector('[data-type="mensaje_request"]');
+		if (msje)
 		{
-			// console.log(msjes);
+			// console.log(msje);
 			
-			msjes.forEach(function(msje)
+			var id	= msje.dataset.id;
+			
+			// Asigna manejador de evento click:
+			msje.addEventListener("click", function(event)
 				{
-					var id	= msje.dataset.id;
-					
-					// Asigna manejador de evento click:
-					msje.addEventListener("click", function(event)
-						{
-							ccRequest.mensaje.ocultar(id);
-						}
-					);
-					// Memoriza los contenedores:
-					ccRequest.dom.msjes[id]	= msje;
-					
-					// Oculta el mensaje:
-					ccRequest.mensaje.ocultar(id);
-					
-					// console.log(msje.className);
+					ccRequest.mensaje.ocultar();
 				}
 			);
+			// Memoriza los contenedores:
+			ccRequest.dom.msje	= msje;
+			
+			// Oculta el mensaje:
+			ccRequest.mensaje.ocultar();
+			
+			// console.log(msje.className);
 		}
 	},
 };

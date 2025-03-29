@@ -34,6 +34,11 @@ NAV [data-type="menu"] [data-type="item"]
 	text-transform:uppercase;
 	text-align:center;
 	color:var(--ThemeColor6);
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 500ms;	
+	animation-name: fade_in;
+	opacity: 1;
 }
 NAV [data-type="menu"] [data-type="item"] A
 {
@@ -122,29 +127,5 @@ Pantallas Chicas
 	NAV.visible [data-id="menu_btn"]:hover
 	{
 		background-color:var(--ThemeColor0);
-	}
-}
-
-/* Configuracion de Animaciones: */
-@keyframes menu_show
-{
-	0%
-	{
-		transform:translateY(calc(calc(100vh + 6px) * (-1)));
-	}
-	100%
-	{
-		transform:translateY(0);
-	}
-}
-@keyframes menu_hide
-{
-	0%
-	{
-		transform:translateY(0);
-	}
-	100%
-	{
-		transform:translateY(calc(calc(100vh + 6px) * (-1)));
 	}
 }

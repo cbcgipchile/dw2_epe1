@@ -7,94 +7,110 @@
 @require	Variables globales: $_RESULT, las recibidas desde req.variables.php
 -------------------------------------------------------------------------------
 */
-$mmodelo	= array("seccion", "item_seccion");
 
-# Busca en el modelo la entidad solicitada:
-if (isset($entidad) && !empty($entidad) && in_array($entidad, $mmodelo))
+# -------------------------------------
+# Proceso de Registro:
+# -------------------------------------
+if (isset($proceso))
 {
-	# Busca el archivo solicitado:
-	$mruta	= "./ctrl/data/".$entidad.".json";
+	$mcampos	= $_POST;
+	
+	// $_RESULT["datos"]	= array("Solicitud de contacto registrada.");
+	$_RESULT["error"]	= false;	// Resetea el error por ahora.
+}
+# -------------------------------------
+# Solicitud de Datos (Lectura):
+# -------------------------------------
+else
+{
+	$mmodelo	= array("seccion", "item_seccion");
 
-	// $_RESULT["trace"][]	= "Buscando archivo ".$mruta;
-
-	if (is_file($mruta))
+	# Busca en el modelo la entidad solicitada:
+	if (isset($entidad) && !empty($entidad) && in_array($entidad, $mmodelo))
 	{
-		// $_RESULT["trace"][]	= "Archivo ".$mruta." encontrado.";
-		
-		# Obtiene el contenido del archivo encontrado:
-		$mcont	= file_get_contents($mruta);
-		
-		if (!empty($mcont))
+		# Busca el archivo solicitado:
+		$mruta	= "./ctrl/data/".$entidad.".json";
+
+		// $_RESULT["trace"][]	= "Buscando archivo ".$mruta;
+
+		if (is_file($mruta))
 		{
-			// $_RESULT["trace"][]	= "Contenido: ".$mcont;
-			$mjson	= json_decode($mcont, true);
+			// $_RESULT["trace"][]	= "Archivo ".$mruta." encontrado.";
 			
-			if (is_array($mjson))
+			# Obtiene el contenido del archivo encontrado:
+			$mcont	= file_get_contents($mruta);
+			
+			if (!empty($mcont))
 			{
-				// $_RESULT["trace"][]	= $mjson;
+				// $_RESULT["trace"][]	= "Contenido: ".$mcont;
+				$mjson	= json_decode($mcont, true);
 				
-				# Verifica si hay filtros, recorre el resultado y retorna
-				# solo los resultados coincidentes:
-				$mresult	= array();
-				$mfiltros	= array();
-				$mfiltrosKeys	= array("id_seccion", "id_seccion_padre", "id_tipo", "id_item_padre");
-				
-				foreach ($mfiltrosKeys as $mkey)
+				if (is_array($mjson))
 				{
-					if (isset($$mkey) && $$mkey !== "")
+					// $_RESULT["trace"][]	= $mjson;
+					
+					# Verifica si hay filtros, recorre el resultado y retorna
+					# solo los resultados coincidentes:
+					$mresult	= array();
+					$mfiltros	= array();
+					$mfiltrosKeys	= array("id_seccion", "id_seccion_padre", "id_tipo", "id_item_padre");
+					
+					foreach ($mfiltrosKeys as $mkey)
 					{
-						$mfiltros[$mkey]	= $$mkey;
-					}
-				}
-				
-				# Si hay filtros:
-				if (count($mfiltros) > 0)
-				{
-					foreach ($mjson as $mfila)
-					{
-						$mok	= 0;
-						foreach ($mfiltros as $mkey => $mval)
+						if (isset($$mkey) && $$mkey !== "")
 						{
-							if (isset($mfila[$mkey])
-								&& $mfila[$mkey] == $mval)
+							$mfiltros[$mkey]	= $$mkey;
+						}
+					}
+					
+					# Si hay filtros:
+					if (count($mfiltros) > 0)
+					{
+						foreach ($mjson as $mfila)
+						{
+							$mok	= 0;
+							foreach ($mfiltros as $mkey => $mval)
 							{
-								$mok++;
+								if (isset($mfila[$mkey])
+									&& $mfila[$mkey] == $mval)
+								{
+									$mok++;
+								}
+							}
+							# Agrega el registro al resultado si cumplio todo los filtros:
+							if ($mok == count($mfiltros))
+							{
+								$mresult[]	= $mfila;
 							}
 						}
-						# Agrega el registro al resultado si cumplio todo los filtros:
-						if ($mok == count($mfiltros))
-						{
-							$mresult[]	= $mfila;
-						}
 					}
+					# Si no hay filtros:
+					else
+					{
+						# Retorna el resultado tal cual viene:
+						$mresult	= $mjson;
+					}
+					$_RESULT["datos"]	= $mresult;
+					$_RESULT["error"]	= false;	// Resetea el error por ahora.
 				}
-				# Si no hay filtros:
 				else
 				{
-					# Retorna el resultado tal cual viene:
-					$mresult	= $mjson;
+					$_RESULT["error"]	= "Error de formato de archivo ".$entidad;
 				}
-				$_RESULT["datos"]	= $mresult;
-				$_RESULT["error"]	= false;	// Resetea el error por ahora.
 			}
 			else
 			{
-				$_RESULT["error"]	= "Error de formato de archivo ".$entidad;
+				$_RESULT["error"]	= "Archivo ".$entidad." vacio";
 			}
 		}
 		else
 		{
-			$_RESULT["error"]	= "Archivo ".$entidad." vacio";
+			$_RESULT["error"]	= "Archivo ".$entidad." no encontrado";
 		}
 	}
 	else
 	{
-		$_RESULT["error"]	= "Archivo ".$entidad." no encontrado";
+		$_RESULT["error"]	= "Solicitud invalida";
 	}
 }
-else
-{
-	$_RESULT["error"]	= "Solicitud invalida";
-}
-
 ?>

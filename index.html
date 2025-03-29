@@ -12,6 +12,7 @@
 		<!-- Hojas de Estilos -->
 		<link rel="stylesheet" href="vw/css/root.css" />
 		<link rel="stylesheet" href="vw/css/body.css" defer />
+		<link rel="stylesheet" href="vw/css/keyframes.css" defer />
 		<link rel="stylesheet" href="vw/css/header.css" defer />
 		<link rel="stylesheet" href="vw/css/nav.css" defer />
 		<link rel="stylesheet" href="vw/css/main.css" defer />
@@ -94,7 +95,11 @@
 			<!-- Plantilla Contenedor e Item de Form de Item -->
 			<template data-id="seccion_form">
 				<article data-type="item_form" data-id="">
-					<form name="">
+					<form name="" method="POST">
+						<input type="hidden" name="proceso" value="" />
+						<input type="hidden" name="entidad" value="item_seccion" />
+						<input type="hidden" name="id_seccion" value="" />
+						<input type="hidden" name="id_item_padre" value="" />
 						<div data-type="fields">
 							<div class="field" data-type="text" data-id="">
 								<label for=""><span></span> <span class="required" title="Requerido">*</span></label>
@@ -106,7 +111,7 @@
 							</div>
 							<div class="field" data-type="textarea" data-id="">
 								<label for=""><span></span> <span class="required" title="Requerido">*</span></label>
-								<textarea name="" id="" size="6" data-type="control"></textarea>
+								<textarea name="" id="" rows="5" data-type="control"></textarea>
 							</div>
 						</div>
 						<div data-type="buttons">
@@ -118,8 +123,7 @@
 
 		</div>
 		
-		<div data-type="mensaje_request" data-id="carga" class="mensaje carga"><p>Espere, por favor...</p></div>
-		<div data-type="mensaje_request" data-id="resultado" class="mensaje"></div>
+		<div data-type="mensaje_request" class="mensaje"></div>
 		
 	</body>
 </html>

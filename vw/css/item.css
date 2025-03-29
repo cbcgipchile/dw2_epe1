@@ -74,8 +74,8 @@ ARTICLE[data-type="item_padre"] > [data-type="texto"]
 	width:calc(100% 
 			- calc(100% / calc(var(--NumeroPhi) + 1)) 
 			- calc(var(--MarginLateral) * 2));
-	height:calc(33vh - calc(var(--MarginLateral) * 2));
-	padding:var(--MarginLateral);
+	height:calc(33vh - var(--MarginLateral));
+	padding:calc(var(--MarginLateral) / 2) var(--MarginLateral);
 	line-height:2em;
 	font-size:var(--SeccionItemSize, 14pt);
 	overflow:auto;
@@ -152,6 +152,7 @@ ARTICLE[data-type="item_form"] .field [data-type="control"]
 	color:var(--ThemeColor6);
 	background-color:var(--ThemeColor4);
 	border-bottom:1px solid var(--ThemeColor5);
+	border-radius:4px;
 	padding:15px;
 }
 ARTICLE[data-type="item_form"] [data-type="buttons"]
@@ -203,17 +204,5 @@ ARTICLE[data-type="item_form"] INPUT[type="submit"]
 	{
 		width:calc(100% - calc(var(--MarginLateral) * 2)) !important;
 		height:auto;
-	}
-}
-/* Configuracion animaciones */
-@keyframes fade_in
-{
-	0%
-	{
-		opacity:0;
-	}
-	100%
-	{
-		opacity:1;
 	}
 }

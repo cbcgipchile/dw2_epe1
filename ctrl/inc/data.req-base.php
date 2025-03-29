@@ -18,5 +18,80 @@ if ($_conexion_bd->connect_errno
 else
 {
 	# Obtiene los datos desde consulta SQL:
+
+	if (isset($entidad) && !empty($entidad))
+	{
+		$mEntidad	= null;
+		switch ($entidad)
+		{
+			case "seccion"		: $mEntidad	= new Seccion(); break;
+			case "item_seccion"	: $mEntidad	= new Item(); break;
+		}
+
+		# -------------------------------------
+		# Proceso de Registro:
+		# -------------------------------------
+		if (isset($proceso))
+		{
+			if (count($_POST) > 0)
+			{
+				$mEntidad->setValores($_POST);
+			}
+			$_RESULT["datos"]	= (isset($actualizar) ? $mEntidad->actualizar(): $mEntidad->agregar());
+		}
+		# -------------------------------------
+		# Solicitud de Datos (Lectura):
+		# -------------------------------------
+		else
+		{
+			if (isset($id_seccion) && !empty($id_seccion))
+			{
+				$mEntidad->setSeccion($id_seccion);
+			}
+			if (isset($id_tipo) && !empty($id_tipo))
+			{
+				$mEntidad->setTipo($id_tipo);
+			}
+			if (isset($id_item_padre) && !empty($id_item_padre))
+			{
+				$mEntidad->setItemPadre($id_item_padre);
+			}
+			$mlista	= $mEntidad->lista();
+			$merror	= $mEntidad->getError();
+			
+			if ($merror === false)
+			{
+				if (is_array($mlista))
+				{
+					if (count($mlista) > 0)
+					{
+						# Reordena los resultados para dejarlos 
+						# como Plain Object (JSON):
+						$mheaders	= array_keys($mlista[0]);
+						$mtemp		= $mlista;
+						$mlista		= [];
+						foreach ($mlista as $mfila)
+						{
+							$mreg	= {};
+							foreach ($mheaders as $mkey)
+							{
+								$mreg[$mkey]	= $mfila[$mkey];
+							}
+							$mlista[]	= $mreg;
+						}
+					}
+					$_RESULT["datos"]	= $mlista;
+				}
+				else
+				{
+					$_RESULT["error"]	= "Datos obtenidos no son validos";
+				}
+			}
+			else
+			{
+				$_RESULT["error"]	= $merror["message"]." (".$merror["code"].")";
+			}
+		}
+	}
 }
 ?>

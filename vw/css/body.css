@@ -85,10 +85,11 @@ A
 }
 .mensaje.error
 {
+	background-color:#FADDDD;
 	background-image:url("../img/icon_error.png");
 }
 .mensaje.exito
 {
 	background-color:var(--ThemeColor1);
-	background-image:url("../img/icon_exito.gif");
+	background-image:url("../img/icon_exito.png");
 }

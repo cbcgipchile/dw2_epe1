@@ -19,13 +19,100 @@ var ccSeccion =
 		templates		: {},	// Plantillas de contenido
 	},
 	
+	/*
+	-----------------------------------
+	@about	Objeto controlador de formularios.
+	*/
 	form	:
 	{
+		/*
+		-----------------------------------
+		@about	Recibe la respuesta tras finalizar el proceso del formulario.
+		@date	28/03/2025
+		@param	response	String	Respuesta del servidor.
+		*/
+		recibir	: function(response)
+		{
+			console.log("[recibir]", response);
+			try
+			{
+				if (response != undefined && response != null && response != "")
+				{
+					var data	= JSON.parse(response);
+					if (data)
+					{
+						console.log(data);
+						
+						if (data.error === false)
+						{
+							if (data.datos != null && data.datos != "")
+							{
+								var resultado	= data.datos;
+							
+								ccRequest.mensaje.mostrar("exito", resultado);
+							}
+							else
+							{
+								ccRequest.mensaje.mostrar("error", "No se recibi&oacute; respuesta. Favor intentarlo en unos minutos. Gracias.");
+							}
+						}
+						else
+						{
+							ccRequest.mensaje.mostrar("error", data.error);
+						}
+					}
+				}
+				else
+				{
+					ccRequest.mensaje.mostrar("error", "No se recibi&oacute; respuesta. Favor intentarlo en unos minutos. Gracias.");
+				}
+			}
+			catch (exc)
+			{
+				console.log(exc);
+			}
+		},
+		/*
+		-----------------------------------
+		@about	Envia a procesar los datos del formulario.
+		@date	28/03/2025
+		*/
 		enviar	: function(event)
 		{
 			event.preventDefault();
-			console.log("[enviar]", event);
-			
+			// console.log("[enviar]", event);
+			try
+			{
+				var form	= event.target;
+				if (form)
+				{
+					var elems	= form.elements;
+					var params	= {};
+					
+					// console.log(elems);
+					if (elems.length > 0)
+					{
+						for (var f = 0; f < elems.length; f++)
+						{
+							// console.log(elems[f].name, elems[f]);
+							if (elems[f].name != "")
+							{
+								params[elems[f].name]	= elems[f].value;
+							}
+						}
+						// console.log(params);
+						// Si hay datos para enviar:
+						if (Object.keys(params).length > 0)
+						{
+							ccRequest.solicitar(params, ccSeccion.form.recibir);
+						}
+					}
+				}
+			}
+			catch (exc)
+			{
+				console.log(exc);
+			}
 			return false;
 		},
 	},
@@ -125,8 +212,9 @@ var ccSeccion =
 												label.querySelector('SPAN').innerHTML	= items[f].nombre;
 												label.setAttribute("for", idControl);
 												
-												var control	= nuevoItem.querySelector('[data-type="control"]');
-												control.id	= idControl;
+												var control		= nuevoItem.querySelector('[data-type="control"]');
+												control.id		= idControl;
+												control.name	= params.field_name;
 												if (params.field_required)
 												{
 													control.setAttribute("required", true);
@@ -156,7 +244,7 @@ var ccSeccion =
 					}
 					else
 					{
-						ccRequest.mensaje.mostrar("resultado", "error", data.error);
+						ccRequest.mensaje.mostrar("error", data.error);
 					}
 				}
 			}
@@ -168,7 +256,7 @@ var ccSeccion =
 	},
 	/*
 	-----------------------------------
-	@about	Carga en titulo y contenedor de seccion los items recibidos.
+	@about	Carga en contenedor de seccion los items recibidos.
 	@date	27/03/2025
 	*/
 	cargar	: function(response)
@@ -340,7 +428,15 @@ var ccSeccion =
 														
 														if (contHijos)
 														{
+															// Asigna valores al contenedor de hijos:
 															contHijos.dataset.id	= items[f].id_item;
+															
+															if (items[f].id_tipo == "form")
+															{
+																contHijos.querySelector('INPUT[name="id_seccion"]').value	= items[0].id_seccion;
+																contHijos.querySelector('INPUT[name="id_item_padre"]').value	= items[0].id_item;
+															}
+															
 															// Lo oculta mientras se solicitan y cargan sus valores:
 															contHijos.classList.add("oculta");
 															
@@ -373,7 +469,7 @@ var ccSeccion =
 					}
 					else
 					{
-						ccRequest.mensaje.mostrar("resultado", "error", data.error);
+						ccRequest.mensaje.mostrar("error", data.error);
 					}
 				}
 			}
