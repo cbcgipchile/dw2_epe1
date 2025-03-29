@@ -5,10 +5,10 @@
 * Sede		: Campus Virtual
 * Carrera		: Ingeniería en Informática
 * Asignatura	: Desarrollo Web 2
-* Estudiante	: Carolina Casanova García
+* Estudiantes	: Carolina Casanova García, Jorge Corvalán Cornejo
 
 ## Descripción del proyecto
-Se trata de una aplicación web que tiene por objetivo servir de portafolio personal y profesional de quien escribe.
+Se trata de una aplicación web que tiene por objetivo servir de portafolio personal y profesional para el equipo de estudiantes, que en esta simulación conforman una sociedad de servicios informáticos.
 
 ### FrontEnd
 La presentación de la aplicación está realizada utilizando HTML y CSS.
