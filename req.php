@@ -15,9 +15,13 @@ error_reporting(E_ALL ^ E_NOTICE);
 # ---------------------------
 
 # Conexion a BD:
-require_once "lib/php/class.ConexionMysql.php";
+require_once "ctrl/lib/class.ConexionMysql.php";
 include "ctrl/inc/data.config.php";
 include "ctrl/inc/data.conexion.php";
+
+# Clases del Modelo:
+require_once "ctrl/lib/class.PSeccion.php";
+require_once "ctrl/lib/class.PItem.php";
 
 # Modulos requeridos:
 include "ctrl/inc/req.variables.php";

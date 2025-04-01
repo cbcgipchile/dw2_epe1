@@ -15,7 +15,8 @@ if (isset($proceso))
 {
 	$mcampos	= $_POST;
 	
-	// $_RESULT["datos"]	= array("Solicitud de contacto registrada.");
+	$_RESULT["datos"]	= array("mensaje"		=> "Su mensaje ha sido registrado. Gracias por contactarnos.",
+								"id_item_padre"	=>	$id_item_padre);
 	$_RESULT["error"]	= false;	// Resetea el error por ahora.
 }
 # -------------------------------------
@@ -91,7 +92,7 @@ else
 						$mresult	= $mjson;
 					}
 					$_RESULT["datos"]	= $mresult;
-					$_RESULT["error"]	= false;	// Resetea el error por ahora.
+					// $_RESULT["error"]	= false;	// Resetea el error por ahora.
 				}
 				else
 				{

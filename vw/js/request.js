@@ -42,7 +42,9 @@ var ccRequest	=
 		{
 			try
 			{
-				// console.log("[conectado]", response, params);
+				console.log("[conectado]", response, params);
+				
+				ccRequest.callbacks.terminado();
 				
 				// Verifica errores:
 				if (response.status.type != "ok")
@@ -62,7 +64,6 @@ var ccRequest	=
 			{
 				console.log("x Error:", exc);
 			}
-			ccRequest.callbacks.terminado();
 		},
 		/*
 		-----------------------------------
@@ -98,6 +99,7 @@ var ccRequest	=
 		*/
 		mostrar	: function(tipo, texto)
 		{
+			// console.log("[mostrar]", tipo, texto);
 			if (ccRequest.dom.msje)
 			{
 				ccRequest.dom.msje.className	= "mensaje oculta";
@@ -109,6 +111,7 @@ var ccRequest	=
 				ccRequest.dom.msje.innerHTML	= '<p>' + texto + '</p>';
 				ccRequest.dom.msje.classList.remove("oculta");
 			}
+			// console.log(ccRequest.dom.msje);
 		},
 		/*
 		-----------------------------------

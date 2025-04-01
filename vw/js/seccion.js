@@ -49,7 +49,17 @@ var ccSeccion =
 							{
 								var resultado	= data.datos;
 							
-								ccRequest.mensaje.mostrar("exito", resultado);
+								ccRequest.mensaje.mostrar("exito", resultado.mensaje);
+								
+								// Limpia el formulario:
+								if (resultado.id_item_padre != undefined)
+								{
+									var form	= ccSeccion.dom.contenedor.querySelector('FORM[data-id_item_padre="' + resultado.id_item_padre + '"]');
+									if (form)
+									{
+										form.reset();
+									}
+								}
 							}
 							else
 							{
@@ -100,6 +110,7 @@ var ccSeccion =
 								params[elems[f].name]	= elems[f].value;
 							}
 						}
+						
 						// console.log(params);
 						// Si hay datos para enviar:
 						if (Object.keys(params).length > 0)
@@ -141,7 +152,7 @@ var ccSeccion =
 				var data	= JSON.parse(response);
 				if (data)
 				{
-					// console.log(data);
+					console.log(data);
 					if (data.error === false)
 					{
 						var items	= data.datos;
@@ -215,13 +226,18 @@ var ccSeccion =
 												var control		= nuevoItem.querySelector('[data-type="control"]');
 												control.id		= idControl;
 												control.name	= params.field_name;
-												if (params.field_required)
+												if (params.field_required
+													&& params.field_required == 1)
 												{
 													control.setAttribute("required", true);
 												}
 												else
 												{
-													label.removeChild(label.querySelector(".required"));
+													var msje_required	= label.querySelector(".required");
+													if (msje_required)
+													{
+														label.removeChild(msje_required);
+													}
 												}
 												
 												cont.appendChild(nuevoItem);
@@ -273,12 +289,11 @@ var ccSeccion =
 					
 					if (data.error === false)
 					{
+						var tit		= ccSeccion.dom.titulo;
+						var cont	= ccSeccion.dom.contenedor;
 						var items	= data.datos;
 						if (items.length > 0)
 						{
-							var tit		= ccSeccion.dom.titulo;
-							var cont	= ccSeccion.dom.contenedor;
-							
 							// Recupera plantilla de item:
 							var temp	= ccSeccion.dom.templates.seccion_item;
 							
@@ -327,10 +342,10 @@ var ccSeccion =
 
 												// - Averigua si hay una imagen asociada:
 												var urlImg	= "./vw/img/icon_solution.png";
-												if (meta.url_portada
-													&& meta.url_portada != "")
+												if (meta.img_portada
+													&& meta.img_portada != "")
 												{
-													urlImg	= meta.url_portada;
+													urlImg	= meta.img_portada;
 												}
 												figure.querySelector(".imagen").style.backgroundImage	= 'url("' + urlImg + '")';
 												figure.querySelector("IMG").src	= urlImg;
@@ -465,6 +480,12 @@ var ccSeccion =
 								
 								cont.classList.remove("carga");
 							}
+						}
+						else
+						{
+							// Si no hay items:
+							cont.classList.remove("carga");
+							cont.innerHTML	= '<div class="mensaje info">En construcci&oacute;n. Disculpe las molestias.</div>';
 						}
 					}
 					else

@@ -18,14 +18,13 @@ if ($_conexion_bd->connect_errno
 else
 {
 	# Obtiene los datos desde consulta SQL:
-
 	if (isset($entidad) && !empty($entidad))
 	{
 		$mEntidad	= null;
 		switch ($entidad)
 		{
-			case "seccion"		: $mEntidad	= new Seccion(); break;
-			case "item_seccion"	: $mEntidad	= new Item(); break;
+			case "seccion"		: $mEntidad	= new Seccion($_conexion_bd); break;
+			case "item_seccion"	: $mEntidad	= new Item($_conexion_bd); break;
 		}
 
 		# -------------------------------------
@@ -52,9 +51,9 @@ else
 			{
 				$mEntidad->setTipo($id_tipo);
 			}
-			if (isset($id_item_padre) && !empty($id_item_padre))
+			if (isset($id_item_padre) && $id_item_padre > -1)
 			{
-				$mEntidad->setItemPadre($id_item_padre);
+				$mEntidad->setPadre($id_item_padre);
 			}
 			$mlista	= $mEntidad->lista();
 			$merror	= $mEntidad->getError();
@@ -62,24 +61,24 @@ else
 			if ($merror === false)
 			{
 				if (is_array($mlista))
-				{
+				{/*
 					if (count($mlista) > 0)
 					{
 						# Reordena los resultados para dejarlos 
 						# como Plain Object (JSON):
 						$mheaders	= array_keys($mlista[0]);
 						$mtemp		= $mlista;
-						$mlista		= [];
+						$mlista		= array();
 						foreach ($mlista as $mfila)
 						{
-							$mreg	= {};
+							$mreg	= array();
 							foreach ($mheaders as $mkey)
 							{
 								$mreg[$mkey]	= $mfila[$mkey];
 							}
 							$mlista[]	= $mreg;
 						}
-					}
+					}*/
 					$_RESULT["datos"]	= $mlista;
 				}
 				else
@@ -89,7 +88,7 @@ else
 			}
 			else
 			{
-				$_RESULT["error"]	= $merror["message"]." (".$merror["code"].")";
+				$_RESULT["error"]	= $merror["mensaje"]." (".$merror["codigo"].")";
 			}
 		}
 	}
